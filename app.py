@@ -1,11 +1,12 @@
 import os
-from datetime import datetime
+from typing import List
 
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
 import flask
-import plotly.graph_objs as go
+
+from db import Value, Session
 
 
 server = flask.Flask(__name__)
@@ -16,17 +17,10 @@ external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
 
 app = dash.Dash(__name__, server=server, external_stylesheets=external_stylesheets)
 
+session = Session()
+data: List[Value] = session.query(Value).order_by(Value.timestamp)[1:1000]
 
-ax = [
-    datetime(2019, 3, 3, 3, 1, 1),
-    datetime(2019, 3, 3, 3, 1, 2),
-    datetime(2019, 3, 3, 3, 1, 3),
-    datetime(2019, 3, 3, 3, 1, 4),
-    datetime(2019, 3, 3, 3, 1, 5),
-    datetime(2019, 3, 3, 3, 1, 6),
-]
-
-trace1 = go.Scatter(x=ax, y=[4, 1, 2])
+ax = [d.timestamp for d in data]
 
 
 app.layout = html.Div(children=[
@@ -37,9 +31,9 @@ app.layout = html.Div(children=[
         id="example-graph",
         figure={
             "data": [
-                {"x": ax, "y": [4, 1, 2, 1, 4], "name": "Fáza 1"},
-                {"x": ax, "y": [2, 4, 5, 4, 2], "name": "Fáza 2"},
-                {"x": ax, "y": [3, 3, 3, 3, 3], "name": "Fáza 3"},
+                {"x": ax, "y": [d.u_1 for d in data], "name": "Fáza 1"},
+                {"x": ax, "y": [d.u_2 for d in data], "name": "Fáza 2"},
+                {"x": ax, "y": [d.u_3 for d in data], "name": "Fáza 3"},
             ],
             "layout": {
                 "title": "Zariadenie 1"
