@@ -34,6 +34,17 @@ app.layout = html.Div(
             id="example-graph",
             figure={
                 "data": [
+                    {"x": ax, "y": [d.p_1 for d in data], "name": "Fáza 1 - P [W]"},
+                    {"x": ax, "y": [d.p_2 for d in data], "name": "Fáza 2 - P [W]"},
+                    {"x": ax, "y": [d.p_3 for d in data], "name": "Fáza 3 - P [W]"},
+                ],
+                "layout": {"title": "Zariadenie 1"},
+            },
+        ),
+        dcc.Graph(
+            id="example-graph2",
+            figure={
+                "data": [
                     {"x": ax, "y": [d.u_1 for d in data], "name": "Fáza 1 - U [V]"},
                     {"x": ax, "y": [d.u_2 for d in data], "name": "Fáza 2 - U [V]"},
                     {"x": ax, "y": [d.u_3 for d in data], "name": "Fáza 3 - U [V]"},
