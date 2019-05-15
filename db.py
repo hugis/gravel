@@ -5,7 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 
-engine = create_engine("postgresql://localhost:5432/gravel", echo=False)
+conn_str = os.environ.get("DATABASE_URL", "postgresql://localhost:5432/gravel")
+engine = create_engine(conn_str, echo=False)
 Session = sessionmaker(bind=engine)
 Base = declarative_base()
 
