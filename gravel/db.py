@@ -1,6 +1,15 @@
 import os
 
-from sqlalchemy import Boolean, Column, ForeignKey, Float, Integer, String, DateTime, create_engine
+from sqlalchemy import (
+    Boolean,
+    Column,
+    ForeignKey,
+    Float,
+    Integer,
+    String,
+    DateTime,
+    create_engine,
+)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 

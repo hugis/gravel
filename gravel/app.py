@@ -7,7 +7,7 @@ import dash_html_components as html
 import flask
 from sqlalchemy import text
 
-from db import Value, Session
+from gravel.db import Value, Session
 
 
 server = flask.Flask(__name__)
